@@ -1,5 +1,8 @@
 # Microblog
 
+GitHub repo: [here](https://github.com/allysonyoung/microblog)
+Deployed application: [here](microblog.breakfastburritos.party)
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
