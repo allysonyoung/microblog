@@ -9,3 +9,12 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias Microblog.Repo
+alias Microblog.Accounts.User
+
+Repo.delete_all(User)
+
+Repo.insert!(%User{email: "admin@blogurrito.com", is_admin?: true})
+Repo.insert!(%User{email: "allyson@blogurrito.com", is_admin?: false})
+Repo.insert!(%User{email: "nattuck@blogurrito.com", is_admin?: false})

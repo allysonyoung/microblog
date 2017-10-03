@@ -1,0 +1,17 @@
+<div class="card text-center">
+  <div class="card-body">
+    <h2 class="card-title"><%= @user.email %>'s profile</h2>
+    <div class="card-info">
+      <h3>Email:</h3>
+      <%= @user.email %></li>
+    </div>
+    <%= if @current_user do %>
+      <%= if !(@current_user.email === @user.email) do %>
+        <button type="button" class="btn btn-success" style="margin-top:20px;">Follow</button>
+      <% else %>
+        <span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<a href="/messages"><button class="btn btn-info" style="margin-top:20px;">Back to User List</button></a>

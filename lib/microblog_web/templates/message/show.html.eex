@@ -1,18 +1,17 @@
-<h2>Show Message</h2>
-
-<ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @message.name %>
-  </li>
-
-  <li>
-    <strong>Message:</strong>
-    <%= @message.message %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: message_path(@conn, :edit, @message) %></span>
-<span><%= link "Back", to: message_path(@conn, :index) %></span>
+<div class="card">
+  <div class="card-header"><%= @message.name %>'s Message</div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <h4><%= @message.message %></h4>
+      <footer class="blockquote-footer"><%= @message.name %></footer>
+    </blockquote>
+    <%= if @current_user do %>
+      <%= if is_admin?(@current_user) do %>
+        <div style="margin-top:15px;">
+          <span><%= link "Edit", to: message_path(@conn, :edit, @message) %></span>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<a href="/messages"><button class="btn btn-info" style="margin-top:20px;">Back to Message List</button></a>
