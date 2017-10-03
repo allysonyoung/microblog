@@ -35,6 +35,7 @@ To log in as a user:
   * Once you're logged in, you won't be able to see the 'New User' Link in the
   `/users` page, since you can't create a new user while logged in as one. You
   would have to log out if you wish to create a new user.
+
 Notes about users and behaviors associated with users:
   * An admin user was pre-populated in the database. Admin user is the only one
   who can both edit and delete anything (users and messages). Admin user can
@@ -62,6 +63,7 @@ Notes about users and behaviors associated with users:
   expected (you can log in and out of a registered user). You can also create,
   edit, and view a user's profile, and I also implemented an admin user
   functionality.
+
 To create a message:
   * The homepage of the microblog app is the messages list feed. There, you can
   create a new message ('New Message' button on the bottom). However, you must
