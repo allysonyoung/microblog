@@ -26,6 +26,7 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
 
 ## Expected Behavior of Microblog application
 
+### HW04 (Logging In, Logging Out, Follow Functionality)
 To log in as a user:
   * Fill in a registered email address in the top right corner and hit 'Log In'.
   * If you don't have a registered email, navigate to the 'Users' link in the nav
@@ -75,3 +76,12 @@ To create a message:
   * I think my message implementation does its job. You can create a new message,
   delete a message or show a message. You can also see a list of all current
   messages in `/messages`.
+
+### HW05 (Likes)
+To like a message:
+  * You must be logged in as a user to be able to a like a message.
+  * Once you're logged in, go to the 'Messages' feed and click 'Show' on a message.
+  There, you can find a 'Like' button under the message contents. You'd have to
+  refresh the page to see the list of likes.
+  * A list of users who have liked the message will appear under the message contents.
+  * Future functionality improvement: Add 'Unlike' or delete likes. 
