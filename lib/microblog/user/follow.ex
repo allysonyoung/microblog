@@ -6,7 +6,6 @@ defmodule Microblog.User.Follow do
 
   schema "follow_stats" do
     field :count, :integer
-    belongs_to :user, Microblog.Accounts.User
 
     timestamps()
   end

@@ -1,0 +1,7 @@
+defmodule Microblog.Repo.Migrations.CreateIndex do
+  use Ecto.Migration
+
+  def change do
+    create index(:messages, [:user_id])
+  end
+end

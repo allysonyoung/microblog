@@ -1,17 +1,38 @@
 <div class="card">
-  <div class="card-header"><%= @message.name %>'s Message</div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-      <h4><%= @message.message %></h4>
-      <footer class="blockquote-footer"><%= @message.name %></footer>
+      <div style="text-align:center;">
+        <h1><%= @message.name %></h1>
+        <h4><%= @message.message %></h4>
+        <%= if @current_user do %>
+          <button id="like-button" class="btn btn-primary" data-user_id="<%= @current_user.id %>">Like</button>
+        <% end %>
+        <%= if @current_user && is_admin?(@current_user) do %>
+          <div style="margin-top:15px;">
+            <span><%= link "Edit", to: message_path(@conn, :edit, @message) %></span>
+          </div>
+        <% end %>
+      </div>
+      <footer class="blockquote-footer">Posted by:
+      <%= Microblog.Accounts.get_user!(@message.user_id).email %> on <%= @message.inserted_at %></footer>
     </blockquote>
-    <%= if @current_user do %>
-      <%= if is_admin?(@current_user) do %>
-        <div style="margin-top:15px;">
-          <span><%= link "Edit", to: message_path(@conn, :edit, @message) %></span>
-        </div>
-      <% end %>
-    <% end %>
+    <div id="message-likes"
+        data-path="<%= like_path(@conn, :index) %>"
+        data-message_id="<%= @message.id %>">
+      &nbsp;
+    </div>
+    <script id="likes-template" type="text/x-handlebars-template">
+      <div class="m-2">
+        <h3>Likes</h3>
+        {{#each data}}
+          <div>
+            <p class="alert alert-success">Liked by {{user_email}}</p>
+          </div>
+        {{else}}
+          <p>No likes yet.</p>
+        {{/each}}
+      </div>
+    </script>
   </div>
 </div>
 <a href="/messages"><button class="btn btn-info" style="margin-top:20px;">Back to Message List</button></a>
