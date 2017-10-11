@@ -7,7 +7,7 @@
       <div class="card-body">
         <h3 class="card-title"><%= message.name %></h3>
           <p><%= message.message %></p>
-          <p>Posted by: <%= Microblog.Accounts.get_user!(message.user_id).email %></p>
+          <p>Posted by: <%= get_user(message.user_id).email %></p>
           <span><%= link "Show", to: message_path(@conn, :show, message), class: "btn btn-default btn-xs" %></span>
           <%= if @current_user do %>
             <%= if is_admin?(@current_user) do %>

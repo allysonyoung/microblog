@@ -12,9 +12,13 @@
 
 alias Microblog.Repo
 alias Microblog.Accounts.User
+alias Microblog.User.Message
 
 Repo.delete_all(User)
+Repo.delete_all(Message)
 
 Repo.insert!(%User{email: "admin@blogurrito.com", is_admin?: true})
 Repo.insert!(%User{email: "allyson@blogurrito.com", is_admin?: false})
 Repo.insert!(%User{email: "nattuck@blogurrito.com", is_admin?: false})
+Repo.insert!(%Message{message: "hello", name: "message1"})
+Repo.insert!(%Message{message: "hello", name: "message2"})
