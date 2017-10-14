@@ -12,7 +12,7 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // which authenticates the session and assigns a `:current_user`.
 // If the current user exists you can assign the user's token in
 // the connection for use in the layout.
-//
+
 // In your "lib/web/router.ex":
 //
 //     pipeline :browser do
@@ -54,7 +54,36 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("topic:subtopic", {})
+let channel = socket.channel("updates:all", {})
+let messages = document.querySelector("#messages")
+
+const createMessage = function({post_title, post_body}) {
+  let messageWrapper = document.createElement("div")
+  messageWrapper.className = "list-group-item"
+
+  let messageTitle = document.createElement("h3")
+  messageTitle.className = "message-title"
+  messageTitle.innerText = post_title
+
+  let messageBody = document.createElement("p")
+  messageBody.innerText = post_body
+  
+  // let showLinkWrapper = document.createElement("span")
+  // let showLink = document.createElement("a")
+  // showLink.className = "btn btn-default btn-xs"
+  // showLink.href = message_path(@conn, :show, this)
+
+  messageWrapper.appendChild(messageTitle)
+  messageWrapper.appendChild(messageBody)
+
+  return messageWrapper
+}
+
+channel.on("new_msg", payload => {
+  let newMessageToAdd = createMessage(payload)
+  messages.prepend(newMessageToAdd)
+})
+
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
