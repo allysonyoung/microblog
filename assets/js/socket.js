@@ -57,7 +57,8 @@ socket.connect()
 let channel = socket.channel("updates:all", {})
 let messages = document.querySelector("#messages")
 
-const createMessage = function({post_title, post_body}) {
+// Builds the message object from client data
+const createMessage = function({post_title, post_body, posted_by, post_path}) {
   let messageWrapper = document.createElement("div")
   messageWrapper.className = "list-group-item"
 
@@ -67,14 +68,24 @@ const createMessage = function({post_title, post_body}) {
 
   let messageBody = document.createElement("p")
   messageBody.innerText = post_body
-  
-  // let showLinkWrapper = document.createElement("span")
-  // let showLink = document.createElement("a")
-  // showLink.className = "btn btn-default btn-xs"
-  // showLink.href = message_path(@conn, :show, this)
+
+  let messageUser = document.createElement("p")
+  messageUser.innerText = "Posted by: " + posted_by
+
+  // Constructs the 'Show' link that appears under the message.
+  // post_path is defined in 'message_controller.ex'
+  let showLinkWrapper = document.createElement("span")
+  let showLink = document.createElement("a")
+  let linkText = document.createTextNode("Show")
+  showLink.appendChild(linkText)
+  showLink.className = "btn btn-default btn-xs"
+  showLink.href = post_path
+  showLinkWrapper.appendChild(showLink)
 
   messageWrapper.appendChild(messageTitle)
   messageWrapper.appendChild(messageBody)
+  messageWrapper.appendChild(messageUser)
+  messageWrapper.appendChild(showLinkWrapper)
 
   return messageWrapper
 }

@@ -26868,9 +26868,12 @@ socket.connect();
 var channel = socket.channel("updates:all", {});
 var messages = document.querySelector("#messages");
 
+// Builds the message object from client data
 var createMessage = function createMessage(_ref) {
   var post_title = _ref.post_title,
-      post_body = _ref.post_body;
+      post_body = _ref.post_body,
+      posted_by = _ref.posted_by,
+      post_path = _ref.post_path;
 
   var messageWrapper = document.createElement("div");
   messageWrapper.className = "list-group-item";
@@ -26882,13 +26885,23 @@ var createMessage = function createMessage(_ref) {
   var messageBody = document.createElement("p");
   messageBody.innerText = post_body;
 
-  // let showLinkWrapper = document.createElement("span")
-  // let showLink = document.createElement("a")
-  // showLink.className = "btn btn-default btn-xs"
-  // showLink.href = message_path(@conn, :show, this)
+  var messageUser = document.createElement("p");
+  messageUser.innerText = "Posted by: " + posted_by;
+
+  // Constructs the 'Show' link that appears under the message.
+  // post_path is defined in 'message_controller.ex'
+  var showLinkWrapper = document.createElement("span");
+  var showLink = document.createElement("a");
+  var linkText = document.createTextNode("Show");
+  showLink.appendChild(linkText);
+  showLink.className = "btn btn-default btn-xs";
+  showLink.href = post_path;
+  showLinkWrapper.appendChild(showLink);
 
   messageWrapper.appendChild(messageTitle);
   messageWrapper.appendChild(messageBody);
+  messageWrapper.appendChild(messageUser);
+  messageWrapper.appendChild(showLinkWrapper);
 
   return messageWrapper;
 };
