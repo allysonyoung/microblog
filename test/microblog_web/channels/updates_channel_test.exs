@@ -6,7 +6,7 @@ defmodule MicroblogWeb.UpdatesChannelTest do
   setup do
     {:ok, _, socket} =
       socket("user_id", %{some: :assign})
-      |> subscribe_and_join(UpdatesChannel, "updates:lobby")
+      |> subscribe_and_join(UpdatesChannel, "updates:all")
 
     {:ok, socket: socket}
   end

@@ -128,9 +128,9 @@ defmodule Microblog.UserTest do
   describe "likes" do
     alias Microblog.User.Like
 
-    @valid_attrs %{}
-    @update_attrs %{}
-    @invalid_attrs %{}
+    @valid_attrs %{message_id: 2, user_id: 1}
+    @update_attrs %{message_id: 1, user_id: 2}
+    @invalid_attrs %{message_id: nil, user_id: nil}
 
     def like_fixture(attrs \\ %{}) do
       {:ok, like} =
