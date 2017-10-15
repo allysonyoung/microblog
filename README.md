@@ -84,4 +84,10 @@ To like a message:
   There, you can find a 'Like' button under the message contents. You'd have to
   refresh the page to see the list of likes.
   * A list of users who have liked the message will appear under the message contents.
-  * Future functionality improvement: Add 'Unlike' or delete likes. 
+  * Future functionality improvement: Add 'Unlike' or delete likes.
+
+## HW06 (Real Time Updates, Continuous Integration Setup)
+  * Added functionality of having real time updates using web sockets. Message
+  title, content, user who posted the message, and a link the the message show
+  page is added to the top of the message feed.
+  * Travis CI was also set up.
