@@ -19,6 +19,7 @@ defmodule MicroblogWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User created successfully.")
+        |> put_flash(:info, "Please log into your new account.")
         |> redirect(to: user_path(conn, :show, user))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
