@@ -1,7 +1,7 @@
-<div class="row">
+<div class="row mx-auto w-75" style="margin:30px">
   <div style="width:100%;">
     <div class="text-center" style="margin-bottom:40px;">
-      <h2 class="display-4">User Profile</h2>
+      <h2>Profile</h2>
       <h4>Email: <%= @user.email %></h4>
       <%= if @current_user && @current_user.email != @user.email && @follow != nil do %>
         <%= form_for @follow, follow_path(@conn, :create), fn f -> %>
@@ -28,7 +28,7 @@
         <%= if Microblog.User.list_user_messages(@user.id) != nil do %>
           <%= for message <- Enum.reverse(Microblog.User.list_user_messages(@user.id)) do %>
             <div style="border-bottom: #eee 1px solid; margin: 35px 0 15px 0;">
-              <h5><%= message.name %></h5>
+              <h5><mark><%= message.name %></mark></h5>
               <p><%= message.message %></p>
             </div>
           <% end %>
@@ -38,4 +38,7 @@
       </div>
     </div>
   </div>
+</div>
+<div class="mx-auto w-75">
+  <a href="/users"><button class="btn btn-info" style="margin-top:20px;">Back to User Directory</button></a>
 </div>

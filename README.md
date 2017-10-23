@@ -1,5 +1,5 @@
 # Microblog
-_The functionality of logging in and out was structured based off of Nat Tuck's
+_The functionality of logging in and out and password hashing were structured based off of Nat Tuck's
 NU Mart class example of that same functionality as well as the class notes for CS4550._
 
 * GitHub repo: [here](https://github.com/allysonyoung/microblog)
@@ -25,6 +25,28 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Source: https://github.com/phoenixframework/phoenix
 
 ## Expected Behavior of Microblog application
+
+### HW07 (Security & Polish)
+  * Implement profile security with secure password hashes using [Comeonin](https://github.com/riverrun/comeonin) (a password hashing library for Elixir).
+  * Slight changes to app layout and navigation, including: redirecting landing page to
+  the 'Welcome'/register a user page, small style clean ups, remove unnecessary links,
+  add necessary links.
+  * Non-HTTPS requests are now redirected to the HTTPS site by Nginx.
+
+### HW06 (Real Time Updates, Continuous Integration Setup)
+  * Added functionality of having real time updates using web sockets. Message
+  title, content, user who posted the message, and a link the the message show
+  page is added to the top of the message feed.
+  * Travis CI was also set up.
+
+### HW05 (Likes)
+To like a message:
+  * You must be logged in as a user to be able to a like a message.
+  * Once you're logged in, go to the 'Messages' feed and click 'Show' on a message.
+  There, you can find a 'Like' button under the message contents. You'd have to
+  refresh the page to see the list of likes.
+  * A list of users who have liked the message will appear under the message contents.
+  * Future functionality improvement: Add 'Unlike' or delete likes.
 
 ### HW04 (Logging In, Logging Out, Follow Functionality)
 To log in as a user:
@@ -76,18 +98,3 @@ To create a message:
   * I think my message implementation does its job. You can create a new message,
   delete a message or show a message. You can also see a list of all current
   messages in `/messages`.
-
-### HW05 (Likes)
-To like a message:
-  * You must be logged in as a user to be able to a like a message.
-  * Once you're logged in, go to the 'Messages' feed and click 'Show' on a message.
-  There, you can find a 'Like' button under the message contents. You'd have to
-  refresh the page to see the list of likes.
-  * A list of users who have liked the message will appear under the message contents.
-  * Future functionality improvement: Add 'Unlike' or delete likes.
-
-### HW06 (Real Time Updates, Continuous Integration Setup)
-  * Added functionality of having real time updates using web sockets. Message
-  title, content, user who posted the message, and a link the the message show
-  page is added to the top of the message feed.
-  * Travis CI was also set up.

@@ -1,6 +1,10 @@
-<h2 class="text-center">Recent Messages</h2>
-
-<div class="list-group" id="messages" style="margin-top: 20px;">
+<h2 class="text-center" style="margin: 20px 0;"><strong>Recent Messages</strong></h2>
+<%= if @current_user do %>
+  <div class="mx-auto w-75">
+    <span><%= link "New Message", to: message_path(@conn, :new) %></span>
+  </div>
+<% end %>
+<div class="list-group mx-auto w-75" id="messages" style="margin-top: 20px;">
   <%= for message <- Enum.reverse(@messages) do %>
     <div class="list-group-item">
       <h3 class="message-title" style="margin-top: 10px;"><mark><%= message.name %></mark></h3>
@@ -23,6 +27,3 @@
       </div>
   <% end %>
 </div>
-<%= if @current_user do %>
-  <span><%= link "New Message", to: message_path(@conn, :new) %></span>
-<% end %>

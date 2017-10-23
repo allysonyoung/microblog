@@ -1,8 +1,9 @@
 <%= if !@current_user do %>
   <div class="text-center">
     <h2 class="display-4">Welcome to Blogurrito!</h2>
-    <p class="lead">Log in with your registered email and password in the nav bar above.</p>
-    <p class="lead">No account? Register below.</p>
+    <p class="lead">Blogurrito is a microblog application that lets you post messages
+    as a registered user, follow other users, like other users' messages, and view a message feed.</p>
+    <p class="lead">Log in with your registered email and password in the nav bar above. No account? Register below.</p>
   </div>
   <div class="mx-auto w-50">
     <%= render "form.html", Map.put(assigns, :action, user_path(@conn, :create)) %>
@@ -10,5 +11,6 @@
 <% else %>
   <div class="text-center">
     <h2 class="display-4">Welcome, <%= @current_user.email %>!</h2>
-    <p class="lead">You can view your profile, your message feed, or view the user listings by using the navigation bar above.</p>
+    <p class="lead">You can view your profile, your message feed, or view the user
+      listings by using the navigation bar above.</p>
 <% end %>

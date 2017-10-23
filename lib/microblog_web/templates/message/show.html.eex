@@ -1,9 +1,9 @@
-<div class="card">
+<div class="card mx-auto w-75">
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-      <div style="text-align:center;">
-        <h1><%= @message.name %></h1>
-        <h4><%= @message.message %></h4>
+      <div class="text-center">
+        <h1 style="margin: 20px 0;"><mark><%= @message.name %></mark></h1>
+        <h4 style="margin-bottom: 30px;"><%= @message.message %></h4>
         <%= if @current_user do %>
           <button id="like-button" class="btn btn-primary" data-user_id="<%= @current_user.id %>">Like</button>
         <% end %>
@@ -13,7 +13,7 @@
           </div>
         <% end %>
       </div>
-      <footer class="blockquote-footer">Posted by:
+      <footer class="blockquote-footer text-center">Posted by:
       <%= Microblog.Accounts.get_user!(@message.user_id).email %> on <%= @message.inserted_at %></footer>
     </blockquote>
     <div id="message-likes"
@@ -23,7 +23,7 @@
     </div>
     <script id="likes-template" type="text/x-handlebars-template">
       <div class="m-2">
-        <h3>Likes</h3>
+        <h3>Liked by:</h3>
         {{#each data}}
           <div>
             <p class="alert alert-success">Liked by {{user_email}}</p>
@@ -35,4 +35,6 @@
     </script>
   </div>
 </div>
-<a href="/messages"><button class="btn btn-info" style="margin-top:20px;">Back to Message List</button></a>
+<div class="mx-auto w-75">
+  <a href="/messages"><button class="btn btn-info" style="margin-top:20px;">Back to Message Feed</button></a>
+</div>
