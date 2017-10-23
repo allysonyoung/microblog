@@ -1,6 +1,7 @@
 defmodule MicroblogWeb.FollowController do
   use MicroblogWeb, :controller
 
+  alias Microblog.Accounts
   alias Microblog.User
   alias Microblog.User.Follow
 
@@ -17,9 +18,11 @@ defmodule MicroblogWeb.FollowController do
   def create(conn, %{"follow" => follow_params}) do
     case User.create_follow(follow_params) do
       {:ok, follow} ->
+        following_user = Accounts.get_user!(follow.following_id)
+
         conn
         |> put_flash(:info, "Follow created successfully.")
-        |> redirect(to: follow_path(conn, :show, follow))
+        |> redirect(to: user_path(conn, :show, following_user))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end

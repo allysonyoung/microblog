@@ -1,4 +1,4 @@
-<h2>Listing Users</h2>
+<h2>User Directory</h2>
 
 <div class="row">
   <%= for user <- @users do %>

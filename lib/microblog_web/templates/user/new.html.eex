@@ -1,5 +1,14 @@
-<h2>New User</h2>
-
-<%= render "form.html", Map.put(assigns, :action, user_path(@conn, :create)) %>
-
-<span><%= link "Back", to: user_path(@conn, :index) %></span>
+<%= if !@current_user do %>
+  <div class="text-center">
+    <h2 class="display-4">Welcome to Blogurrito!</h2>
+    <p class="lead">Log in with your registered email and password in the nav bar above.</p>
+    <p class="lead">No account? Register below.</p>
+  </div>
+  <div class="mx-auto w-50">
+    <%= render "form.html", Map.put(assigns, :action, user_path(@conn, :create)) %>
+  </div>
+<% else %>
+  <div class="text-center">
+    <h2 class="display-4">Welcome, <%= @current_user.email %>!</h2>
+    <p class="lead">You can view your profile, your message feed, or view the user listings by using the navigation bar above.</p>
+<% end %>

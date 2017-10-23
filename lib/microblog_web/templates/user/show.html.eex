@@ -1,22 +1,33 @@
 <div class="row">
   <div style="width:100%;">
     <div class="text-center" style="margin-bottom:40px;">
-      <h2 class="user-title">User Profile</h2>
+      <h2 class="display-4">User Profile</h2>
       <h4>Email: <%= @user.email %></h4>
-      <%= if @current_user do %>
-        <%= if @current_user.email != @user.email do %>
-          <button type="button" class="btn btn-success" style="margin-top:20px;">Follow</button>
-        <% else %>
-          <span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
+      <%= if @current_user && @current_user.email != @user.email && @follow != nil do %>
+        <%= form_for @follow, follow_path(@conn, :create), fn f -> %>
+          <%= if @follow.action do %>
+            <div class="alert alert-danger">
+              <p>Oops, something went wrong! Please check the errors below.</p>
+            </div>
+          <% end %>
+
+          <%= hidden_input f, :user_id, value: @current_user.id %>
+          <%= hidden_input f, :following_id, value: @user.id %>
+
+         <div class="form-group">
+           <%= submit "Follow", class: "btn btn-success" %>
+          </div>
         <% end %>
+      <% else %>
+        <span><%= link "Edit Your Profile", to: user_path(@conn, :edit, @user) %></span>
       <% end %>
     </div>
     <div>
-      <h4 class="text-center">Messages posted by this user:</h4>
-      <div>
+      <h4 class="text-center"><u>Latest messages from <%= @user.email %>:</u></h4>
+      <div class="mx-auto w-50">
         <%= if Microblog.User.list_user_messages(@user.id) != nil do %>
           <%= for message <- Enum.reverse(Microblog.User.list_user_messages(@user.id)) do %>
-            <div style="border-bottom: #eee 1px solid; margin-bottom:15px;">
+            <div style="border-bottom: #eee 1px solid; margin: 35px 0 15px 0;">
               <h5><%= message.name %></h5>
               <p><%= message.message %></p>
             </div>
@@ -28,4 +39,3 @@
     </div>
   </div>
 </div>
-<a href="/messages"><button class="btn btn-info" style="margin-top:20px;">Back to User List</button></a>

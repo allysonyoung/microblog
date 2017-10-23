@@ -3,6 +3,7 @@ defmodule MicroblogWeb.UserController do
 
   alias Microblog.Accounts
   alias Microblog.Accounts.User
+  alias Microblog.User.Follow
 
   def index(conn, _params) do
     users = Accounts.list_users()
@@ -28,7 +29,15 @@ defmodule MicroblogWeb.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
-    render(conn, "show.html", user: user)
+    if conn.assigns[:current_user] do
+      follow = Microblog.User.change_follow(
+        %Microblog.User.Follow{
+          user_id: conn.assigns[:current_user].id,
+          following_id: user.id
+        }
+      )
+    end
+    render(conn, "show.html", user: user, follow: follow)
   end
 
   def edit(conn, %{"id" => id}) do

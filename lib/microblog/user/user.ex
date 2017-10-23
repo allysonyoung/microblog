@@ -121,6 +121,10 @@ defmodule Microblog.User do
     Repo.all(Follow)
   end
 
+  def list_user_follows(user_id) do
+    Repo.all(from f in Follow, where: f.user_id == ^user_id)
+  end
+
   @doc """
   Gets a single follow.
 

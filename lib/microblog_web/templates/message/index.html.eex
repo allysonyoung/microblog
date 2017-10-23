@@ -1,12 +1,17 @@
-<h2>Recent Messages</h2>
+<h2 class="text-center">Recent Messages</h2>
 
-<div class="list-group" id="messages">
+<div class="list-group" id="messages" style="margin-top: 20px;">
   <%= for message <- Enum.reverse(@messages) do %>
     <div class="list-group-item">
-      <h3 class="message-title"><%= message.name %></h3>
+      <h3 class="message-title" style="margin-top: 10px;"><mark><%= message.name %></mark></h3>
         <p><%= message.message %></p>
         <%= if message.user_id != nil do %>
           <p>Posted by: <%= get_user(message.user_id).email %></p>
+        <% end %>
+        <%= if length(Microblog.User.list_message_likes(message.id)) > 0 do %>
+          <p>This message has <%= length(Microblog.User.list_message_likes(message.id)) %> like(s).</p>
+        <% else %>
+          <p>No likes yet.</p>
         <% end %>
         <span><%= link "Show", to: message_path(@conn, :show, message), class: "btn btn-default btn-xs" %></span>
         <%= if @current_user do %>
