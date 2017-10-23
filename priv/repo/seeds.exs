@@ -21,16 +21,19 @@ Repo.delete_all(User)
 Repo.delete_all(Message)
 Repo.delete_all(Like)
 
-user1 = %User{email: "admin@blogurrito.com", password: "blogadmin",
-  password_confirmation: "blogadmin", is_admin?: true}
+user1password = "blogadmin"
+user1 = %User{email: "admin@blogurrito.com", password: user1password,
+  password_confirmation: user1password, is_admin?: true, password_hash: Comeonin.Argon2.hashpwsalt(user1password)}
 user1 = Repo.insert!(user1)
 
-user2 = %User{email: "allyson@blogurrito.com", password: "allysonblog",
-  password_confirmation: "allysonblog",is_admin?: false}
+user2password = "allysonblog"
+user2 = %User{email: "allyson@blogurrito.com", password: user2password,
+  password_confirmation: user2password, is_admin?: false, password_hash: Comeonin.Argon2.hashpwsalt(user2password)}
 user2 = Repo.insert!(user2)
 
-user3 = %User{email: "nattuck@blogurrito.com", password: "nattuckblog",
-  password_confirmation: "nattuckblog", is_admin?: false}
+user3password = "nattuckblog"
+user3 = %User{email: "nattuck@blogurrito.com", password: user3password,
+  password_confirmation: user3password, is_admin?: false, password_hash: Comeonin.Argon2.hashpwsalt(user3password)}
 user3 = Repo.insert!(user3)
 
 Repo.insert!(%Message{message: "hello", name: "message1", user_id: user1.id})
